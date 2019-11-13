@@ -16,6 +16,7 @@ public class GameController : MonoBehaviour
     public Text ScoreText;
     public Text RestartText;
     public Text GameOverText;
+    public Text winText;
 
     private bool gameOver;
     private bool restart;
@@ -27,6 +28,7 @@ public class GameController : MonoBehaviour
         restart = false;
         RestartText.text = "";
         GameOverText.text = "";
+        winText.text = "";
         score = 0;
         UpdateScore();
         StartCoroutine (SpawnWaves());
@@ -79,11 +81,17 @@ public class GameController : MonoBehaviour
     void UpdateScore()
     {
         ScoreText.text = "Score: " + score;
+        if (score >= 100)
+        {
+            winText.text = "You win! Game created by Casey Chung";
+            gameOver = true;
+            restart = true;
+        }
     }
 
     public void GameOver ()
     {
-        GameOverText.text = "Game Over!";
+        GameOverText.text = "Game Over! :(";
         gameOver = true;
     }
 }
